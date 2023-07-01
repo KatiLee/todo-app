@@ -1,4 +1,4 @@
-import { createStyles, Navbar, test } from "@mantine/core";
+import { createStyles, Navbar, Text } from "@mantine/core";
 
 const useStyles = createStyles((theme) => ({
     navbar: {
@@ -16,7 +16,7 @@ function Header() {
     return (
         <header>
             <Navbar className={classes.navbar}>
-                <text>Home</text>
+                <Text>Home</Text>
             </Navbar>
         </header>
     )

@@ -3,6 +3,7 @@ import React from 'react';
 import Todo from './Components/Todo';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
+import SettingsForm from './Components/SettingForm/index';
 
 export default class App extends React.Component {
   render() {
@@ -10,6 +11,7 @@ export default class App extends React.Component {
       <>
       <Header />
       <Todo />
+      <SettingsForm />
       <Footer />
       </>
     );
