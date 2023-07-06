@@ -1,6 +1,6 @@
-import { useContext, useState } from "react";
+import { useContext, useState } from 'react';
 import { SettingsContext } from "../../Context/Settings";
-import { Button, createStyles, Grid, NumberInput, Switch, Text, TextInput } from "@mantine/core";
+import { Button, Card, createStyles, Grid, NumberInput, Switch, Text, TextInput } from "@mantine/core";
 import { IconSettings } from '@tabler/icons-react'; 
 import { When } from 'react-if';
 
@@ -30,24 +30,26 @@ function SettingsForm() {
         saveLocally,
     } = useContext(SettingsContext);
     console.log({ sort }, { showComplete }, { displayCount });
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const handleSubmit = (event) => {
+        event.preventDefault();
         saveLocally();
         setShow(true);
-        e.target.reset();
+        event.target.reset();
     }
 
     return (
         <>
         <h1 className={classes.h1}><IconSettings /> Manage Settings</h1>
-        <Grid style={{ width: '80%', margin: 'auto '}}>
-            <Grid.Col span={6}>
+        <Grid style={{ width: '80%', margin: 'auto' }}>
+            <Grid.Col xs={12} sm={6}>
+                <Card withBorder>
                 <form onSubmit={handleSubmit}>
                     <Text fontSize="xl" weight="bold">Update Settings</Text>
                     <Switch
                     checked={showComplete}
-                    onChange={(e) => setShowComplete(e.currentTarget.checked)}
+                    onChange={(event) => setShowComplete(event.currentTarget.checked)}
                     label="Show Completed Todos"
+                    m="sm"
                     />
                     <NumberInput
                     value={displayCount}
@@ -57,17 +59,22 @@ function SettingsForm() {
                     <TextInput
                     placeholder={sort}
                     label="Sort Keyword"
-                    onChange={(e) => setSort(e.currentTarget.value)}
+                    onChange={(event) => setSort(event.currentTarget.value)}
                     />
-                    <Button type="submit">Show New Settings</Button>
+                    <Button mt="sm" type="submit">Show New Settings</Button>
                 </form>
+                </Card>
             </Grid.Col>
-            <Grid.Col span={6}>
-                <When conditions={show}>
-                    <Text fontSize="xl" weight="bold">Updated Settings</Text>
-                    <Text>{showComplete ? 'Show' : 'Hide'} Completed Todos</Text> 
-                    <Text> Items Per Page: {displayCount}</Text>
-                    <Text>Sort Keyword: {sort}</Text>
+            <Grid.Col xs={12} sm={6}>
+                <When condition={show}>
+                    <Card withBorder>
+                    <Card.Section>
+                    <Text m="xl" fontSize="xl" weight="bold">Updated Settings</Text>
+                    </Card.Section>
+                    <Text m="sm">{showComplete ? 'Show' : 'Hide'} Completed Todos</Text> 
+                    <Text m="sm"> Items Per Page: {displayCount}</Text>
+                    <Text m="sm">Sort Keyword: {sort}</Text>
+                    </Card>
                 </When>
             </Grid.Col>
         </Grid>
